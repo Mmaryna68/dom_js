@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Калькулятор квадрата числа</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #82d6ed;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .input-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .input-label {
+        margin-right: 10px;
+        min-width: 50px;
+        text-align: right;
+      }
+      .input-field {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-left: 40px;
+        font-size: 16px;
+      }
+      .button {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        font-size: 16px;
+        background-color: dimgray;
+        color: #ccc;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease-in-out;
+      }
+
+      .button:hover {
+        background-color: #0056b3;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+        transform: scale(1.1);
+      }
+
+      .result-container {
+        display: flex;
+        align-items: center;
+      }
+      .result-label {
+        margin-right: 10px;
+        min-width: 50px;
+        text-align: right;
+      }
+      .result-field {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 16px;
+        margin-left: 18px;
+        background-color: #f0f0f0;
+        cursor: not-allowed;
+        color: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Задание: калькулятор квадрата числа</h1>
+    <div>
+      <div class="input-container">
+        <label class="input-label">Число:</label>
+        <input
+          class="input-field"
+          type="text"
+          id="number-input"
+          onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+        />
+      </div>
+      <div class="input-container">
+        <label class="input-label">Результат:</label>
+        <input class="result-field" type="text" id="result-input" readonly />
+      </div>
+      <button class="button" onclick="calculateSquare()">
+        Вычислить квадрат
+      </button>
+    </div>
+
+    <script>
+      function calculateSquare() {
+        const numberInput = document.getElementById("number-input");
+        const resultInput = document.getElementById("result-input");
+
+        const number = Number(numberInput.value);
+        const square = number * number;
+
+        resultInput.value = square;
+      }
+    </script>
+  </body>
+</html>

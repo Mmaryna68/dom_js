@@ -45,3 +45,10 @@ for (let i = 0; i < cartItems.length; i++) {
 discountBtn.addEventListener("click", () => {
   applyDiscount();
 });
+
+//перейти на сайт Википедия
+const wikiButton = document.getElementById("wikiButton");
+
+wikiButton.addEventListener("click", function () {
+  window.open("https://ru.wikipedia.org/wiki/");
+});
