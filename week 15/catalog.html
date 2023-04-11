@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>кОтОлог</title>
+    <style>
+      .page {
+        margin: 0;
+        font-family: Inter;
+        background-color: #3c39ec;
+      }
+
+      .catalog {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 50px;
+      }
+
+      .page__catalog {
+        width: 90%;
+        margin: auto;
+      }
+
+      .card {
+        flex-grow: 1;
+        flex-basis: 20%;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .catalog__card {
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-bottom: 20px;
+      }
+
+      .card__image {
+        width: 300px;
+        height: 200px;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+      }
+
+      .card__info {
+        box-sizing: border-box;
+        width: 300px;
+        padding: 10px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+      }
+
+      .card__info_theme_dark {
+        background-color: #000;
+        color: #fff;
+      }
+
+      .card__title {
+        font-size: 16px;
+        line-height: 20px;
+        margin: 0 0 5px;
+      }
+
+      .card__text {
+        font-size: 12px;
+        line-height: 16px;
+        margin: 0 0 5px;
+      }
+    </style>
+  </head>
+  <body class="page">
+    <main class="catalog page__catalog">
+      <article class="card">
+        <img
+          src="https://klike.net/uploads/posts/2019-06/medium/1561011183_14.jpg"
+          alt=""
+          class="card__image"
+        />
+        <div class="card__info card__info_theme_dark">
+          <h3 class="card__title">Стёпа</h3>
+          <p class="card__text">Пол: <span class="gender">девочка</span></p>
+          <p class="card__text">Возраст: 16 мес.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img
+          src="https://www.purina.ru/sites/default/files/2021-10/britanskaya-3.jpg"
+          alt=""
+          class="card__image"
+        />
+        <div class="card__info card__info_theme_dark">
+          <h3 class="card__title">Стеша</h3>
+          <p class="card__text">Пол: девочка</p>
+          <p class="card__text">Возраст: 36 мес.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img
+          src="https://www.belanta.vet/vet-blog/wp-content/uploads/2019/09/5-4.jpg"
+          alt=""
+          class="card__image"
+        />
+        <div class="card__info card__info_theme_dark">
+          <h3 class="card__title">Тимофей</h3>
+          <p class="card__text">Пол: мальчик</p>
+          <p class="card__text">Возраст: 21 мес.</p>
+        </div>
+      </article>
+    </main>
+    <script>
+      // Находим карточку Стёпы
+      const cards = document.querySelectorAll(".card");
+
+      cards.forEach((card) => {
+        const title = card.querySelector(".card__title").textContent;
+        switch (title) {
+          case "Стёпа":
+            const gender = card.querySelector(".gender");
+            gender.textContent = "мальчик";
+
+            break;
+          case "Стеша":
+            card.insertAdjacentHTML(
+              "beforeend",
+              '<p class="card__text">Порода: британская</p>'
+            );
+            card.insertAdjacentHTML(
+              "beforeend",
+              '<p class="card__text">Вес: 4 кг</p>'
+            );
+            card.insertAdjacentHTML(
+              "beforeend",
+              '<p class="card__text">Заводчик: Иванова А.С.</p>'
+            );
+            card.insertAdjacentHTML(
+              "beforeend",
+              '<p class="card__text">Город: Москва</p>'
+            );
+            break;
+          case "Тимофей":
+            card.insertAdjacentHTML(
+              "beforeend",
+              '<p class="card__text">Порода: шотландская</p>'
+            );
+            card.insertAdjacentHTML(
+              "beforeend",
+              '<p class="card__text">Вес: 3.5 кг</p>'
+            );
+            card.insertAdjacentHTML(
+              "beforeend",
+              '<p class="card__text">Заводчик: Петрова Е.В.</p>'
+            );
+            card.insertAdjacentHTML(
+              "beforeend",
+              '<p class="card__text">Город: Санкт-Петербург</p>'
+            );
+            break;
+        }
+      });
+
+      const stepaCard = document.querySelector(".card:nth-of-type(1)");
+
+      let infoAdded = false;
+
+      stepaCard.addEventListener("mouseover", () => {
+        if (!infoAdded) {
+          const cardInfo = stepaCard.querySelector(".card__info");
+
+          const breed = document.createElement("p");
+          breed.classList.add("card__text");
+          breed.textContent = "Порода: мейкун";
+          cardInfo.appendChild(breed);
+
+          const weight = document.createElement("p");
+          weight.classList.add("card__text");
+          weight.textContent = "Вес: 5кг";
+          cardInfo.appendChild(weight);
+
+          const breeder = document.createElement("p");
+          breeder.classList.add("card__text");
+          breeder.textContent = "Заводчик: Иванова Елена";
+          cardInfo.appendChild(breeder);
+
+          const city = document.createElement("p");
+          city.classList.add("card__text");
+          city.textContent = "Город: Москва";
+          cardInfo.appendChild(city);
+
+          infoAdded = true;
+        }
+      });
+
+      stepaCard.addEventListener("mouseout", () => {
+        const cardInfo = stepaCard.querySelector(".card__info");
+        const breed = cardInfo.querySelector(":last-child");
+        const weight = cardInfo.querySelector(":last-child");
+        const breeder = cardInfo.querySelector(":nth-last-child(2)");
+        const city = cardInfo.querySelector(":last-child");
+
+        cardInfo.removeChild(breed);
+        cardInfo.removeChild(weight);
+        cardInfo.removeChild(breeder);
+        cardInfo.removeChild(city);
+
+        infoAdded = false;
+      });
+    </script>
+  </body>
+</html>
